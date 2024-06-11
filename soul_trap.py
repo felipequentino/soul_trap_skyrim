@@ -1,3 +1,9 @@
+# The key that you want to press to stop the script (default is 'x')
+STOP_KEY = 'x'
+
+# The number of casts you want to do before restart the loop by waiting 
+CASTS_BEFORE_WAIT = 2
+
 from pywinauto import  keyboard, mouse
 from keyboard import  wait
 from threading import Thread
@@ -19,7 +25,7 @@ def update_steps():
     while not is_pressed:
         time.sleep(0.5)
         
-        for i in range(3):
+        for i in range(CASTS_BEFORE_WAIT):
             mouse.press(button='left', coords=(0, 0))
             mouse.press(button='right', coords=(0, 0))
             time.sleep(1)
@@ -35,7 +41,7 @@ def update_steps():
 
 def event_listener():
     global is_pressed
-    wait('x')
+    wait(STOP_KEY)
     is_pressed = True
     return
 
